@@ -6,7 +6,7 @@ const Home = () => {
     data: blogs,
     isPending,
     error,
-  } = useFetch("http://localhost:8000/blogs");
+  } = useFetch("https://jsonplaceholder.typicode.com/posts");
 
   return (
     <div className="home">
@@ -16,5 +16,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;

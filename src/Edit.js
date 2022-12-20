@@ -1,23 +1,37 @@
 import axios from "axios";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 
-const Create = () => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [userId, setAuthor] = useState("");
+const Edit = () => {
   const [isPending, setIsPending] = useState(false);
   const history = useHistory();
+  const [blog, setBlog] = useState({ title: "", body: "", userId: "" });
+  const { userId, title, body } = blog;
+  const { id } = useParams();
+
+  const onInputChange = (e) => {
+    setBlog({ ...blog, [e.target.name]: e.target.value });
+  };
+
+  const loadBlog = async () => {
+    const result = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts/" + id
+    );
+    setBlog(result.data);
+  };
+
+  useEffect(() => {
+    loadBlog();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const blog = { title, body, userId };
 
     setIsPending(true);
 
     axios
-      .post("https://jsonplaceholder.typicode.com/posts", {
-        headers: { "Content-Type": "application/json" },
+      .put("https://jsonplaceholder.typicode.com/posts/" + id, {
+        headers: { "Content-Type": "application/json; charset=UTF-8" },
         body: JSON.stringify(blog),
       })
       .then((response) => {
@@ -30,23 +44,20 @@ const Create = () => {
 
   return (
     <div className="create">
-      <h2>Add a new blog</h2>
+      <h2>Edit current blog</h2>
       <form onSubmit={handleSubmit}>
-        <label>Blog Title:</label>
+        <label>New Title:</label>
         <input
           type="text"
           required
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          placeholder=""
+          onChange={(e) => onInputChange(e)}
         />
-        <label>Blog content:</label>
-        <textarea
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          required
-        />
-        <label>Blog Author:</label>
-        <select value={userId} onChange={(e) => setAuthor(e.target.value)}>
+        <label>New content:</label>
+        <textarea value={body} onChange={(e) => onInputChange(e)} required />
+        <label>New Author:</label>
+        <select value={userId} onChange={(e) => onInputChange(e)}>
           <option value="1">mario</option>
           <option value="2">yoshi</option>
           <option value="3">luigi</option>
@@ -65,4 +76,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default Edit;

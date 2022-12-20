@@ -1,5 +1,6 @@
 import { useHistory, useParams } from "react-router-dom";
 import useFetch from "./useFetch";
+import axios from "axios";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -7,15 +8,21 @@ const BlogDetails = () => {
     data: blog,
     error,
     isPending,
-  } = useFetch("http://localhost:8000/blogs/" + id);
+  } = useFetch("https://jsonplaceholder.typicode.com/posts/" + id);
+
   const history = useHistory();
 
-  const handleClick = () => {
-    fetch("http://localhost:8000/blogs/" + blog.id, { method: "DELETE" }).then(
-      () => {
+  const deleteOnClick = () => {
+    axios
+      .delete("https://jsonplaceholder.typicode.com/posts/" + blog.id)
+      .then((response) => {
+        console.log(response.status);
         history.push("/");
-      }
-    );
+      });
+  };
+
+  const goToEdit = () => {
+    history.push("/edit/" + blog.id);
   };
 
   return (
@@ -25,9 +32,10 @@ const BlogDetails = () => {
       {blog && (
         <article>
           <h2>{blog.title}</h2>
-          <p>Written by {blog.author}</p>
+          <p>Written by {blog.userId}</p>
           <div>{blog.body}</div>
-          <button onClick={handleClick}>delete</button>
+          <button onClick={goToEdit}>edit</button>
+          <button onClick={deleteOnClick}>delete</button>
         </article>
       )}
     </div>

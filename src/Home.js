@@ -1,9 +1,9 @@
-import BlogList from "./BlogList";
+import SongList from "./SongList";
 import useFetch from "./useFetch";
 
 const Home = () => {
   const {
-    data: blogs,
+    data: songs,
     isPending,
     error,
   } = useFetch("https://jsonplaceholder.typicode.com/posts");
@@ -11,8 +11,8 @@ const Home = () => {
   return (
     <div className="home">
       {error && <div>{error}</div>}
-      {isPending && <div>Loading...</div>}
-      {blogs && <BlogList blogs={blogs} title={"All blogs!"} />}
+      {isPending && <div>Conținutul paginii se încarcă...</div>}
+      {songs && <SongList songs={songs} title={"Toate cântările!"} />}
     </div>
   );
 };

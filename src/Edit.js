@@ -5,23 +5,23 @@ import { useHistory, useParams } from "react-router-dom";
 const Edit = () => {
   const [isPending, setIsPending] = useState(false);
   const history = useHistory();
-  const [blog, setBlog] = useState({ title: "", body: "", userId: "" });
-  const { userId, title, body } = blog;
+  const [song, setSong] = useState({ title: "", body: "", userId: "" });
+  const { userId, title, body } = song;
   const { id } = useParams();
 
   const onInputChange = (e) => {
-    setBlog({ ...blog, [e.target.name]: e.target.value });
+    setSong({ ...song, [e.target.name]: e.target.value });
   };
 
-  const loadBlog = async () => {
+  const loadSong = async () => {
     const result = await axios.get(
       "https://jsonplaceholder.typicode.com/posts/" + id
     );
-    setBlog(result.data);
+    setSong(result.data);
   };
 
   useEffect(() => {
-    loadBlog();
+    loadSong();
   }, []);
 
   const handleSubmit = (e) => {
@@ -32,7 +32,7 @@ const Edit = () => {
     axios
       .put("https://jsonplaceholder.typicode.com/posts/" + id, {
         headers: { "Content-Type": "application/json; charset=UTF-8" },
-        body: JSON.stringify(blog),
+        body: JSON.stringify(song),
       })
       .then((response) => {
         setIsPending(false);
@@ -44,9 +44,9 @@ const Edit = () => {
 
   return (
     <div className="create">
-      <h2>Edit current blog</h2>
+      <h2>Edit current song</h2>
       <form onSubmit={handleSubmit}>
-        <label>New Title:</label>
+        <label>Titlu nou:</label>
         <input
           type="text"
           required
@@ -54,9 +54,9 @@ const Edit = () => {
           placeholder=""
           onChange={(e) => onInputChange(e)}
         />
-        <label>New content:</label>
+        <label>Conținut nou:</label>
         <textarea value={body} onChange={(e) => onInputChange(e)} required />
-        <label>New Author:</label>
+        <label>Autor nou:</label>
         <select value={userId} onChange={(e) => onInputChange(e)}>
           <option value="1">mario</option>
           <option value="2">yoshi</option>
@@ -69,8 +69,8 @@ const Edit = () => {
           <option value="9">princess daisy</option>
           <option value="10">boo</option>
         </select>
-        {!isPending && <button>Add Blog</button>}
-        {isPending && <button disabled>Adding blog...</button>}
+        {!isPending && <button>Adaugă</button>}
+        {isPending && <button disabled>Adăugare...</button>}
       </form>
     </div>
   );

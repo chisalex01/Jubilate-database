@@ -7,61 +7,80 @@
   color: #333;
 }
 .navbar {
-  padding: 20px;
+  top: 0;
+  width: 100%;
+  position: fixed;
   display: flex;
   align-items: center;
-  max-width: 600px;
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
+  background-color: #015b64;
+  border-bottom-left-radius: 10px;
 }
 .navbar h1 {
-  color: #f1356d;
+  color: #015b64;
 }
 .navbar .links {
   margin-left: auto;
+  margin-right: 3em;
 }
 .navbar a {
   margin-left: 16px;
   text-decoration: none;
+  font-size: 20px;
   padding: 6px;
+  color: white;
 }
 .navbar a:hover {
-  color: #f1356d;
+  background-color: #f2f2f2;
+  color: #015b64;
+  border-radius: 8px;
+}
+.navbar img {
+  height: 75px;
+  margin-left: 3em;
 }
 .content {
   max-width: 600px;
-  margin: 40px auto;
+  margin: 100px auto;
   padding: 20px;
 }
 
-.blog-preview {
+.song-preview {
   padding: 10px 16px;
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
 }
-.blog-preview:hover {
+.song-preview:hover {
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
 }
-.blog-preview h2 {
+.song-preview h2 {
   font-size: 20px;
-  color: #f1356d;
+  color: #015b64;
   margin-bottom: 8px;
 }
-.blog-preview a {
+.song-preview a {
   text-decoration: none;
 }
-.blog-details div {
+.song-details div {
   margin: 20px 0;
 }
-.blog-details button {
-  background: #f1356d;
+.song-details button {
+  background: #015b64;
   color: #fff;
-  border: 0;
+  border: 3px solid white;
   margin-right: 20px;
   width: 100px;
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 15px;
+}
+.song-details button:hover {
+  background: white;
+  color: #015b64;
+  border: 2px solid #015b64;
+  font-weight: 700;
 }
 
 .create {
@@ -69,13 +88,9 @@
   margin: 0 auto;
   text-align: center;
 }
-.center label {
-  text-align: left;
-  display: block;
-}
 .create h2 {
   font-size: 20px;
-  color: #f1356d;
+  color: #015b64;
   margin-bottom: 30px;
 }
 .create input,
@@ -89,10 +104,45 @@
   display: block;
 }
 .create button {
-  background: #f1356d;
+  background: #015b64;
   color: #fff;
-  border: 0;
-  padding: 8px;
+  border: 2px solid white;
+  margin-top: 20px;
+  padding: 13px;
   border-radius: 8px;
   cursor: pointer;
+}
+.create button:hover {
+  background: white;
+  color: #015b64;
+  border: 2px solid #015b64;
+  font-weight: 700;
+}
+textarea {
+  resize: vertical;
+  min-height: 100px;
+  max-height: 300px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #015b64;
+  border-bottom-left-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: white;
+  border: 5px solid #015b64;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  border: 5px solid #014f56;
 }

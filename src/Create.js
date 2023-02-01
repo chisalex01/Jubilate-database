@@ -11,14 +11,14 @@ const Create = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const blog = { title, body, userId };
+    const song = { title, body, userId };
 
     setIsPending(true);
 
     axios
       .post("https://jsonplaceholder.typicode.com/posts", {
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(blog),
+        body: JSON.stringify(song),
       })
       .then((response) => {
         setIsPending(false);
@@ -30,22 +30,22 @@ const Create = () => {
 
   return (
     <div className="create">
-      <h2>Add a new blog</h2>
+      <h2>Adaugă cântare nouă</h2>
       <form onSubmit={handleSubmit}>
-        <label>Blog Title:</label>
+        <label>Titlu:</label>
         <input
           type="text"
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <label>Blog content:</label>
+        <label>Conținut:</label>
         <textarea
           value={body}
           onChange={(e) => setBody(e.target.value)}
           required
         />
-        <label>Blog Author:</label>
+        <label>Autor:</label>
         <select value={userId} onChange={(e) => setAuthor(e.target.value)}>
           <option value="1">mario</option>
           <option value="2">yoshi</option>
@@ -58,8 +58,8 @@ const Create = () => {
           <option value="9">princess daisy</option>
           <option value="10">boo</option>
         </select>
-        {!isPending && <button>Add Blog</button>}
-        {isPending && <button disabled>Adding blog...</button>}
+        {!isPending && <button>Adaugă</button>}
+        {isPending && <button disabled>Adăugare cântare...</button>}
       </form>
     </div>
   );

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <h1>The Dojo Blog</h1>
+      <img src={require("./Logo.png")}></img>
       <div className="links">
         <Link to="/">Home</Link>
-        <Link to="/create">New Blog</Link>
+        <Link to="/create">Adaugă cântare</Link>
       </div>
     </nav>
   );

@@ -2,10 +2,10 @@ import { useHistory, useParams } from "react-router-dom";
 import useFetch from "./useFetch";
 import axios from "axios";
 
-const BlogDetails = () => {
+const SongDetails = () => {
   const { id } = useParams();
   const {
-    data: blog,
+    data: song,
     error,
     isPending,
   } = useFetch("https://jsonplaceholder.typicode.com/posts/" + id);
@@ -14,7 +14,7 @@ const BlogDetails = () => {
 
   const deleteOnClick = () => {
     axios
-      .delete("https://jsonplaceholder.typicode.com/posts/" + blog.id)
+      .delete("https://jsonplaceholder.typicode.com/posts/" + song.id)
       .then((response) => {
         console.log(response.status);
         history.push("/");
@@ -22,24 +22,24 @@ const BlogDetails = () => {
   };
 
   const goToEdit = () => {
-    history.push("/edit/" + blog.id);
+    history.push("/edit/" + song.id);
   };
 
   return (
-    <div className="blog-details">
-      {isPending && <div>Loading...</div>}
+    <div className="song-details">
+      {isPending && <div>Conținutul paginii se încarcă...</div>}
       {error && <div>{error}</div>}
-      {blog && (
+      {song && (
         <article>
-          <h2>{blog.title}</h2>
-          <p>Written by {blog.userId}</p>
-          <div>{blog.body}</div>
-          <button onClick={goToEdit}>edit</button>
-          <button onClick={deleteOnClick}>delete</button>
+          <h2>{song.title}</h2>
+          <p>Scrisă de {song.userId}</p>
+          <div>{song.body}</div>
+          <button onClick={goToEdit}>editează</button>
+          <button onClick={deleteOnClick}>șterge</button>
         </article>
       )}
     </div>
   );
 };
 
-export default BlogDetails;
+export default SongDetails;

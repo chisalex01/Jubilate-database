@@ -1,6 +1,6 @@
 import Navbar from "./Navbar";
 import Home from "./Home";
-import BlogDetails from "./BlogDetails";
+import SongDetails from "./SongDetails";
 import NotFound from "./NotFound";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Create from "./Create";
@@ -19,8 +19,8 @@ function App() {
             <Route path="/create">
               <Create />
             </Route>
-            <Route path="/blogs/:id">
-              <BlogDetails />
+            <Route path="/Songs/:id">
+              <SongDetails />
             </Route>
             <Route path="/edit/:id">
               <Edit />

@@ -6,7 +6,7 @@ const Home = () => {
     data: songs,
     isPending,
     error,
-  } = useFetch("https://jsonplaceholder.typicode.com/posts");
+  } = useFetch("http://localhost:8000/songs/");
 
   return (
     <div className="home">

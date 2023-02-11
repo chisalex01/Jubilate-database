@@ -1,28 +1,30 @@
 {
-  "blogs": [
+  "songs": [
     {
-      "title": "My first Blog",
-      "body": "Why do we use it?\nIt is a long establihed fact that a reader will be distracted",
-      "author": "mario",
+      "title": "s",
+      "body": "s",
+      "author": "s",
       "id": 1
     },
     {
-      "title": "Opening party!",
-      "body": "Why do we use it?\nIt is a long establihed fact that a reader will be distracted",
-      "author": "yoshi",
+      "title": "s",
+      "body": "s",
+      "author": "s",
       "id": 2
+    }
+  ],
+  "users": [
+    {
+      "username": "Chis Alexandru",
+      "email": "chisalex01@yahoo.com",
+      "password": "parola",
+      "id": 1
     },
     {
-      "title": "Lessgo!",
-      "body": "Everything is working as expected",
-      "author": "yoshi",
-      "id": 4
-    },
-    {
-      "title": "sdfsdf",
-      "body": "sdfsd",
-      "author": "",
-      "id": 5
+      "username": "Utilizator Anonim",
+      "email": "email@yahoo.com",
+      "password": "parola",
+      "id": 2
     }
   ]
 }

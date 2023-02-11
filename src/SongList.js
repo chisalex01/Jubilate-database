@@ -8,7 +8,7 @@ const SongList = ({ songs, title }) => {
         <div className="song-preview" key={song.id}>
           <Link to={`/songs/${song.id}`}>
             <h2>{song.title}</h2>
-            <p>Scrisă de {song.userId}</p>
+            <p>Compusă de {song.author}</p>
           </Link>
         </div>
       ))}

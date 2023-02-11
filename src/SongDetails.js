@@ -8,17 +8,15 @@ const SongDetails = () => {
     data: song,
     error,
     isPending,
-  } = useFetch("https://jsonplaceholder.typicode.com/posts/" + id);
+  } = useFetch("http://localhost:8000/songs/" + id);
 
   const history = useHistory();
 
   const deleteOnClick = () => {
-    axios
-      .delete("https://jsonplaceholder.typicode.com/posts/" + song.id)
-      .then((response) => {
-        console.log(response.status);
-        history.push("/");
-      });
+    axios.delete("http://localhost:8000/songs/" + song.id).then((response) => {
+      console.log(response.status);
+      history.push("/home");
+    });
   };
 
   const goToEdit = () => {
@@ -32,7 +30,7 @@ const SongDetails = () => {
       {song && (
         <article>
           <h2>{song.title}</h2>
-          <p>Scrisă de {song.userId}</p>
+          <p>Scrisă de {song.author}</p>
           <div>{song.body}</div>
           <button onClick={goToEdit}>editează</button>
           <button onClick={deleteOnClick}>șterge</button>

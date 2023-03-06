@@ -6,7 +6,7 @@ const Navbar = () => {
       <img src={require("./Logo.png")}></img>
       <div className="links">
         <Link to="/home">Acasă</Link>
-        <Link to="/create">Adaugă cântare</Link>
+        <Link to="/addData">Adăugă date</Link>
       </div>
     </nav>
   );

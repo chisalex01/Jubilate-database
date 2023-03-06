@@ -1,16 +1,15 @@
 {
   "songs": [
     {
-      "title": "s",
-      "body": "s",
-      "author": "s",
+      "titleRo": "Mărețul Har",
+      "titleOriginal": "Amazing Grace",
+      "book": "Jubilate I",
+      "year": "2023",
+      "page": "999",
+      "bookOriginal": "Culegere",
+      "publisher": "Editura",
+      "author": "",
       "id": 1
-    },
-    {
-      "title": "s",
-      "body": "s",
-      "author": "s",
-      "id": 2
     }
   ],
   "users": [
@@ -25,6 +24,20 @@
       "email": "email@yahoo.com",
       "password": "parola",
       "id": 2
+    }
+  ],
+  "books": [
+    {
+      "bookTitle": "Jubilate I",
+      "id": 1
+    },
+    {
+      "bookTitle": "Jubilate II",
+      "id": 2
+    },
+    {
+      "bookTitle": "Jubilate III",
+      "id": 3
     }
   ]
 }

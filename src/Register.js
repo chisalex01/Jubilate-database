@@ -48,11 +48,19 @@ const Register = () => {
       setEmailMessage("");
     }
     if (!password) setPasswordMessage("*spațiu necompletat");
-    else if (password.length < 8)
+    else if (password.length <= 8)
       setPasswordMessage("*formatul parolei este incorect");
     else setPasswordMessage("");
 
-    if (found === false && username && email && password)
+    if (
+      found === false &&
+      username &&
+      email &&
+      password &&
+      isValidName(username) &&
+      isValidEmail(email) &&
+      password.length >= 8
+    )
       axios
         .post("http://localhost:8000/users/", {
           username: username,

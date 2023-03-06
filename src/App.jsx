@@ -1,13 +1,14 @@
 import Navbar from "./Navbar";
 import Home from "./Home";
 import SongDetails from "./SongDetails";
-import NotFound from "./NotFound";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Create from "./Create";
-import Edit from "./Edit";
+import AddSong from "./AddSong";
+import EditSong from "./EditSong";
 import React from "react";
 import Login from "./Login";
 import Register from "./Register";
+import AddData from "./AddData";
+import AddBook from "./AddBook";
 
 class App extends React.Component {
   constructor(props) {
@@ -39,10 +40,9 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <Navbar />
-          <div className="content">
-            <Switch>
-              <Route exact path="/">
+          <Switch>
+            <Route exact path="/">
+              <div className="content">
                 <div className="login">
                   <div
                     className="container"
@@ -62,24 +62,32 @@ class App extends React.Component {
                     onClick={this.changeState.bind(this)}
                   />
                 </div>
-              </Route>
-              <Route path="/home">
-                <Home />
-              </Route>
-              <Route path="/create">
-                <Create />
-              </Route>
-              <Route path="/songs/:id">
-                <SongDetails />
-              </Route>
-              <Route path="/edit/:id">
-                <Edit />
-              </Route>
-              <Route paht="*">
-                <NotFound />
-              </Route>
-            </Switch>
-          </div>
+              </div>
+            </Route>
+            <>
+              <Navbar />
+              <>
+                <Route path="/home">
+                  <Home />
+                </Route>
+                <Route path="/addData">
+                  <AddData />
+                </Route>
+                <Route path="/addBook">
+                  <AddBook />
+                </Route>
+                <Route path="/addSong">
+                  <AddSong />
+                </Route>
+                <Route path="/song/:id">
+                  <SongDetails />
+                </Route>
+                <Route path="/editSong/:id">
+                  <EditSong />
+                </Route>
+              </>
+            </>
+          </Switch>
         </div>
       </Router>
     );

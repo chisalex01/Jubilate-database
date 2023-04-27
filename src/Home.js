@@ -29,7 +29,7 @@ const Home = () => {
           <option value="titleOriginal">titlu original</option>
           <option value="book">culegere</option>
           <option value="year">anul lansării</option>
-          <option value="page">pagină</option>
+          <option value="number">numărul cântării</option>
           <option value="bookOriginal">culegerea originală</option>
           <option value="publisher">editură</option>
         </select>

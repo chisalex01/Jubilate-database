@@ -1,24 +1,38 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 const AddSong = () => {
   const [titleRo, setTitleRo] = useState("");
   const [titleOriginal, setTitleOriginal] = useState("");
-  // const [author, setAuthor] = useState("");
   const [book, setBook] = useState("");
   const [year, setYear] = useState("");
-  const [page, setPage] = useState("");
-  const [bookOriginal, setBookOriginal] = useState("");
+  const [number, setNumber] = useState("");
   const [publisher, setPublisher] = useState("");
+  const [contract, setContract] = useState("");
   var currentYear = new Date().getFullYear();
-  // const [body, setBody] = useState("");
   const [isPending] = useState(false);
   const history = useHistory();
-  var books = new Array();
-  axios.get("http://localhost:8000/books").then((e) => {
-    for (let i = 0; i < e.data.length; i++) books.push(e.data[i].bookTitle);
-  });
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    var options = [];
+    axios
+      .get("http://localhost:8000/books")
+      .then((e) => {
+        for (let i = 0; i < e.data.length; i++) {
+          options.push({
+            value: e.data[i].bookTitle,
+            text: e.data[i].bookTitle,
+          });
+          setBooks(options);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,11 +43,9 @@ const AddSong = () => {
         titleOriginal: titleOriginal,
         book: book,
         year: year,
-        page: page,
-        bookOriginal: bookOriginal,
+        number: number,
         publisher: publisher,
-        // body: body,
-        // author: author,
+        contract: contract,
       })
       .then((response) => {
         console.log(response.status);
@@ -66,7 +78,11 @@ const AddSong = () => {
           required
           onChange={(e) => setBook(e.target.value)}
         >
-          {books.map((e) => console.log(e))}
+          {books.map((e) => (
+            <option key={e.value} value={e.value}>
+              {e.text}
+            </option>
+          ))}
         </select>
         <label>Anul publicării:</label>
         <input
@@ -77,43 +93,28 @@ const AddSong = () => {
           max={currentYear}
           onChange={(e) => setYear(e.target.value)}
         ></input>
-        <label>Pagina în cartea Jubilate:</label>
+        <label>Numărul cântării:</label>
         <input
           type="number"
-          value={page}
+          value={number}
           min="1"
           max="999"
           required
-          onChange={(e) => setPage(e.target.value)}
+          onChange={(e) => setNumber(e.target.value)}
         ></input>
-        <label>Culegerea originală:</label>
-        <input
-          type="text"
-          value={bookOriginal}
-          required
-          onChange={(e) => setBookOriginal(e.target.value)}
-        ></input>
-        <label>Editura:</label>
+        <label>Deținătorul drepturilor:</label>
         <input
           type="text"
           value={publisher}
           required
           onChange={(e) => setPublisher(e.target.value)}
         ></input>
-        {/* <label>Autor:</label>
-        <input
-          type="text"
-          value={author}
-          required
-          onChange={(e) => setAuthor(e.target.value)}
-        ></input> */}
-        {/* <label>Conținut:</label>
-        <textarea
-          type="text"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          required
-        /> */}
+        <label>Tip Contract:</label>
+        <select value={contract} onChange={(e) => setContract(e.target.value)}>
+          <option value="Contract de cesiune">Contract de cesiune</option>
+          <option value="Contract de editare">Contract de editare</option>
+          <option value="Plată în străinătate">Plată în străinătate</option>
+        </select>
         {!isPending && <button>Adaugă</button>}
         {isPending && <button disabled>În curs de autentificare...</button>}
       </form>

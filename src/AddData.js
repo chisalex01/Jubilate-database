@@ -46,12 +46,6 @@ const AddData = () => {
           +
         </button>
       </div>
-      <div className="addButton">
-        <h3>Tip persoană:</h3>
-        <button className="button" onClick={() => goToLink("/addSong")}>
-          +
-        </button>
-      </div>
     </div>
   );
 };

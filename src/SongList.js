@@ -16,8 +16,8 @@ function SongList({ input, songs, criteria }) {
     } else if (criteria === "year") {
       filter = "Anul lansării: " + e.year;
       return e.year.toLowerCase().includes(input);
-    } else if (criteria === "page") {
-      filter = "Pagina din culegere: " + e.page;
+    } else if (criteria === "number") {
+      filter = "Numărul cântării " + e.number;
       return e.page.toLowerCase().includes(input);
     } else if (criteria === "bookOriginal") {
       filter = "Culegere originală: " + e.bookOriginal;
@@ -35,7 +35,6 @@ function SongList({ input, songs, criteria }) {
           <Link to={`/song/${song.id}`}>
             <h2>{song.titleRo}</h2>
             <p>{filter}</p>
-            {/* <p>Compusă de {song.author}</p> */}
           </Link>
         </div>
       ))}

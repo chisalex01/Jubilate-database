@@ -1,15 +1,24 @@
 {
   "songs": [
     {
-      "titleRo": "Mărețul Har",
-      "titleOriginal": "Amazing Grace",
-      "book": "Jubilate I",
-      "year": "2023",
-      "page": "999",
-      "bookOriginal": "Culegere",
-      "publisher": "Editura",
-      "author": "",
+      "titleRo": "Titlu",
+      "titleOriginal": "Title",
+      "book": "Jubilate II",
+      "year": "1934",
+      "number": "7",
+      "publisher": "Eu",
+      "contract": "Contract de editare",
       "id": 1
+    },
+    {
+      "titleRo": "Cântare",
+      "titleOriginal": "Song",
+      "book": "Jubilate II",
+      "year": "1901",
+      "number": "2",
+      "publisher": "adf",
+      "contract": "Plată în străinătate",
+      "id": 2
     }
   ],
   "users": [
@@ -38,6 +47,14 @@
     {
       "bookTitle": "Jubilate III",
       "id": 3
+    },
+    {
+      "bookTitle": "Jubilate IV",
+      "id": 4
+    },
+    {
+      "bookTitle": "Jubilate IV",
+      "id": 5
     }
   ]
 }

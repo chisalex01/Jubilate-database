@@ -10,14 +10,33 @@ const Edit = () => {
     titleOriginal: "",
     book: "",
     year: "",
-    page: "",
+    number: "",
     bookOriginal: "",
-    publisher: "",
+    contract: "",
   });
-  const { titleRo, titleOriginal, book, year, page, bookOriginal, publisher } =
-    song;
+  const { titleRo, titleOriginal, book, year, number, contract } = song;
   var currentYear = new Date().getFullYear();
   const { id } = useParams();
+
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    var options = [];
+    axios
+      .get("http://localhost:8000/books")
+      .then((e) => {
+        for (let i = 0; i < e.data.length; i++) {
+          options.push({
+            value: e.data[i].bookTitle,
+            text: e.data[i].bookTitle,
+          });
+          setBooks(options);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   const onInputChange = (e) => {
     setSong({ ...song, [e.target.name]: e.target.value });
@@ -39,7 +58,7 @@ const Edit = () => {
       .put(`http://localhost:8000/songs/${id}`, song)
       .then((response) => {
         console.log(response.status);
-        history.push("/home");
+        history.push(`/song/${id}`);
       });
   };
 
@@ -66,14 +85,19 @@ const Edit = () => {
           onChange={(e) => onInputChange(e)}
         />
         <label>Culegere nouă:</label>
-        <input
+        <select
           type="text"
-          required
           value={book}
-          placeholder="Culegerea de care aparține"
+          required
           name="book"
           onChange={(e) => onInputChange(e)}
-        />
+        >
+          {books.map((e) => (
+            <option key={e.value} value={e.value}>
+              {e.text}
+            </option>
+          ))}
+        </select>
         <label>An nou:</label>
         <input
           type="number"
@@ -85,55 +109,29 @@ const Edit = () => {
           name="year"
           onChange={(e) => onInputChange(e)}
         />
-        <label>Pagină nouă:</label>
+        <label>Număr nou cântare:</label>
         <input
           type="number"
           required
           min="1"
           max="999"
-          value={page}
-          placeholder="Pagina în culegerea Jubilate"
-          name="page"
+          value={number}
+          placeholder="Numărul în culegerea Jubilate"
+          name="number"
           onChange={(e) => onInputChange(e)}
         />
-        <label>Culegere orginală nouă:</label>
-        <input
-          type="text"
-          required
-          value={bookOriginal}
-          placeholder="Numele culegerii originale"
-          name="bookOriginal"
+        <label>Tip nou contract:</label>
+        <select
+          name="contract"
+          value={contract}
           onChange={(e) => onInputChange(e)}
-        />
-        <label>Editură nouă:</label>
-        <input
-          type="text"
-          required
-          value={publisher}
-          placeholder="Editura de care aparține"
-          name="publisher"
-          onChange={(e) => onInputChange(e)}
-        />
-        {/* <label>Autor nou:</label>
-        <input
-          value={author}
-          type="text"
-          onChange={(e) => onInputChange(e)}
-          required
-          placeholder="Autor"
-          name="author"
-        ></input>
-        <label>Conținut nou:</label>
-        <textarea
-          value={body}
-          type="text"
-          onChange={(e) => onInputChange(e)}
-          required
-          name="body"
-          placeholder="Conținut"
-        /> */}
-        {!isPending && <button>Adaugă</button>}
-        {isPending && <button disabled>Adăugare...</button>}
+        >
+          <option value="Contract de cesiune">Contract de cesiune</option>
+          <option value="Contract de editare">Contract de editare</option>
+          <option value="Plată în străinătate">Plată în străinătate</option>
+        </select>
+        {!isPending && <button>Modifică</button>}
+        {isPending && <button disabled>Modificare...</button>}
       </form>
     </div>
   );

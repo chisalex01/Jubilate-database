@@ -50,16 +50,16 @@ const SongDetails = () => {
               <td>{song.year}</td>
             </tr>
             <tr>
-              <td>Pagina</td>
-              <td>{song.page}</td>
+              <td>Numărul cântării</td>
+              <td>{song.number}</td>
             </tr>
             <tr>
-              <td>Culegerea originală</td>
-              <td> {song.bookOriginal}</td>
-            </tr>
-            <tr>
-              <td>Editura </td>
+              <td>Editura</td>
               <td>{song.publisher}</td>
+            </tr>
+            <tr>
+              <td>Tip contract</td>
+              <td>{song.contract}</td>
             </tr>
           </table>
           {/* <p>Compusă de {song.author}</p> */}

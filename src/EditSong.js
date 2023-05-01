@@ -11,10 +11,11 @@ const Edit = () => {
     book: "",
     year: "",
     number: "",
-    bookOriginal: "",
+    publisher: "",
     contract: "",
   });
-  const { titleRo, titleOriginal, book, year, number, contract } = song;
+  const { titleRo, titleOriginal, book, year, number, publisher, contract } =
+    song;
   var currentYear = new Date().getFullYear();
   const { id } = useParams();
 
@@ -118,6 +119,15 @@ const Edit = () => {
           value={number}
           placeholder="Numărul în culegerea Jubilate"
           name="number"
+          onChange={(e) => onInputChange(e)}
+        />
+        <label>Deținător drepturi nou:</label>
+        <input
+          type="text"
+          required
+          value={publisher}
+          placeholder="Deținător drepturi"
+          name="publisher"
           onChange={(e) => onInputChange(e)}
         />
         <label>Tip nou contract:</label>

@@ -5,37 +5,36 @@ import { useHistory, useParams } from "react-router-dom";
 const Edit = () => {
   const [isPending] = useState(false);
   const history = useHistory();
+  const { id } = useParams();
+  const [books, setBooks] = useState([]);
+  var currentYear = new Date().getFullYear();
   const [song, setSong] = useState({
     titleRo: "",
     titleOriginal: "",
     book: "",
     year: "",
     number: "",
-    publisher: "",
-    contract: "",
+    admin: "",
+    adminContact: "",
   });
-  const { titleRo, titleOriginal, book, year, number, publisher, contract } =
+  const { titleRo, titleOriginal, book, year, number, admin, adminContact } =
     song;
-  var currentYear = new Date().getFullYear();
-  const { id } = useParams();
 
-  const [books, setBooks] = useState([]);
+  const goBack = () => {
+    history.push(`/songDetails/${id}`);
+  };
 
   useEffect(() => {
-    var options = [];
     axios
       .get("http://localhost:8000/books")
-      .then((e) => {
-        for (let i = 0; i < e.data.length; i++) {
-          options.push({
-            value: e.data[i].bookTitle,
-            text: e.data[i].bookTitle,
-          });
-          setBooks(options);
-        }
+      .then((response) => {
+        const sortedOptions = response.data.sort((a, b) =>
+          a.bookTitle.localeCompare(b.bookTitle)
+        );
+        setBooks(sortedOptions);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
@@ -95,7 +94,7 @@ const Edit = () => {
         >
           {books.map((e) => (
             <option key={e.value} value={e.value}>
-              {e.text}
+              {e.bookTitle}
             </option>
           ))}
         </select>
@@ -125,12 +124,21 @@ const Edit = () => {
         <input
           type="text"
           required
-          value={publisher}
+          value={admin}
           placeholder="Deținător drepturi"
-          name="publisher"
+          name="admin"
           onChange={(e) => onInputChange(e)}
         />
-        <label>Tip nou contract:</label>
+        <label>Date de contact noi:</label>
+        <input
+          type="text"
+          required
+          value={adminContact}
+          placeholder="Datele de contact ale adminului"
+          name="adminContact"
+          onChange={(e) => onInputChange(e)}
+        />
+        {/* <label>Tip nou contract:</label>
         <select
           name="contract"
           value={contract}
@@ -139,9 +147,14 @@ const Edit = () => {
           <option value="Contract de cesiune">Contract de cesiune</option>
           <option value="Contract de editare">Contract de editare</option>
           <option value="Plată în străinătate">Plată în străinătate</option>
-        </select>
-        {!isPending && <button>Modifică</button>}
-        {isPending && <button disabled>Modificare...</button>}
+        </select> */}
+        <div>
+          {!isPending && <button>Modificați</button>}
+          {isPending && <button disabled>Modificare...</button>}
+          <button onClick={goBack} style={{ marginLeft: "10px" }}>
+            Înapoi
+          </button>
+        </div>
       </form>
     </div>
   );

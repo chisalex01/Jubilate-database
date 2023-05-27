@@ -6,6 +6,15 @@
   font-family: "Quicksand";
   color: #333;
 }
+
+p,
+a {
+  white-space: nowrap;
+  line-height: 2.4;
+  font-size: 20px;
+  text-decoration: none;
+}
+
 .navbar {
   top: 0;
   width: 100%;
@@ -45,16 +54,17 @@
   margin-inline: auto;
   padding: 20px;
   margin-top: 100px;
-  margin-inline: 35%;
 }
 
 .song-preview {
-  padding: 10px 16px;
-  margin: 20px 0;
+  padding: 20px 20px;
+  margin: 2em 0em;
   border-bottom: 1px solid #fafafa;
-  width: 100%;
-  box-shadow: 0px 4px 4px 0px #aaaaaa;
+  box-shadow: 1px 3px 5px 5px #0000001f;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 .song-preview h2 {
   font-size: 20px;
@@ -70,24 +80,25 @@
   display: flex;
   flex-direction: column;
   margin-inline: auto;
-  margin-top: 150px;
+  margin-top: 100px;
 }
 .button {
   background: #015b64;
   color: #fff;
   border: 3px solid white;
   width: 125px;
-  height: 60px;
+  height: 90px;
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 20px;
   margin-block: 10px;
+  border: 2px solid #015b64;
 }
 .button:hover {
   background: white;
   color: #015b64;
-  border: 2px solid #015b64;
+
   font-weight: 700;
 }
 
@@ -121,6 +132,7 @@
   padding: 13px;
   font-size: 20px;
   border-radius: 8px;
+  width: 150px;
   cursor: pointer;
 }
 .create button:hover {
@@ -262,7 +274,7 @@ textarea:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  margin-inline: auto;
   position: relative;
   z-index: 1;
 }
@@ -291,6 +303,8 @@ textarea:focus {
 
 .btn {
   font-size: 21px;
+  height: 60px;
+  width: 150px;
   padding: 5px 20px;
   border: 0;
   background-color: #015b64;
@@ -298,7 +312,6 @@ textarea:focus {
   border-radius: 3px;
   transition: all 250ms ease-in-out;
   cursor: pointer;
-  margin-top: 20px;
 }
 .btn:hover {
   background-color: #014f56;
@@ -335,7 +348,7 @@ textarea:focus {
   align-items: center;
   flex-direction: row;
   max-width: 90%;
-  margin-top: 20px;
+  margin-block: 20px;
 }
 
 .error {
@@ -350,7 +363,6 @@ textarea:focus {
 
 .song-list {
   width: 100%;
-  margin-top: 3em;
 }
 
 table {
@@ -359,7 +371,6 @@ table {
 }
 
 td {
-  border: 1px solid #00000053;
   text-align: left;
   padding: 8px;
   color: white;
@@ -367,12 +378,16 @@ td {
   height: 60px;
 }
 
+td:nth-child(even) {
+  text-align: center;
+}
+
 tr:nth-child(even) {
-  background-color: #014f56d2;
+  background: linear-gradient(to left, #038591, #00626b);
 }
 
 tr:nth-child(odd) {
-  background-color: #017883d2;
+  background: linear-gradient(to right, #038591, #00626b);
 }
 
 .buttons {
@@ -397,37 +412,21 @@ tr:nth-child(odd) {
 
 .searchbar {
   display: flex;
-  height: 50px;
+  margin-block: 20px;
 }
 
 .search {
-  height: inherit;
-  margin-top: 0px;
+  min-width: 50px;
+
   margin-left: 10px;
 }
 
 select {
-  width: 210px;
   font-size: 20px;
   font-weight: 500;
-  border: 0px solid;
+  border: 1px solid;
   margin-left: 10px;
   background: #f3f3f3;
-}
-
-p,
-a {
-  white-space: nowrap;
-  line-height: 2.4;
-  font-size: 20px;
-}
-
-h3 {
-  margin-top: 25px;
-}
-
-h1 {
-  margin-block: 50px;
 }
 
 .addData {
@@ -440,5 +439,32 @@ h1 {
 .addButton {
   display: flex;
   width: 450px;
+  align-items: center;
   justify-content: space-between;
+  margin-inline: auto;
+}
+
+.popup {
+  position: absolute;
+  background-color: white;
+  padding: 50px;
+  border-radius: 5px;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

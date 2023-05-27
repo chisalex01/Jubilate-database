@@ -7,6 +7,10 @@ const AddSong = () => {
   const [isPending] = useState(false);
   const history = useHistory();
 
+  const goBack = () => {
+    history.push("/books");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -16,13 +20,13 @@ const AddSong = () => {
       })
       .then((response) => {
         console.log(response.status);
-        history.push("/addData");
+        history.push("/books");
       });
   };
 
   return (
     <div className="create">
-      <h2>Adaugă culegere nouă</h2>
+      <h2>Adăugare culegere</h2>
       <form onSubmit={handleSubmit}>
         <label>Titlul Culegerii:</label>
         <input
@@ -31,8 +35,13 @@ const AddSong = () => {
           value={bookTitle}
           onChange={(e) => setBookTitle(e.target.value)}
         />
-        {!isPending && <button>Adaugă</button>}
-        {isPending && <button disabled>În curs de autentificare...</button>}
+        <div>
+          {!isPending && <button>Adaugă</button>}
+          {isPending && <button disabled>În curs de autentificare...</button>}
+          <button onClick={goBack} style={{ marginLeft: "10px" }}>
+            Înapoi
+          </button>
+        </div>
       </form>
     </div>
   );

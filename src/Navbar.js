@@ -5,8 +5,8 @@ const Navbar = () => {
     <nav className="navbar">
       <img src={require("./Logo.png")}></img>
       <div className="links">
-        <Link to="/home">Acasă</Link>
-        <Link to="/addData">Adăugă date</Link>
+        <Link to="/songs">Cântări</Link>
+        <Link to="/books">Culegeri</Link>
       </div>
     </nav>
   );

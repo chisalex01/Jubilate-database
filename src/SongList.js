@@ -1,25 +1,40 @@
 import { Link } from "react-router-dom";
 
 function SongList({ input, songs, criteria }) {
-  const filteredData = songs.filter((e) => {
-    if (input === "") {
-      return e;
-    } else if (criteria === "title") {
-      return e.titleRo.toLowerCase().includes(input);
-    } else if (criteria === "titleOriginal") {
-      return e.titleOriginal.toLowerCase().includes(input);
-    } else if (criteria === "book") {
-      return e.book.toLowerCase().includes(input);
-    } else if (criteria === "year") {
-      return e.year.toLowerCase().includes(input);
-    } else if (criteria === "number") {
-      return e.page.toLowerCase().includes(input);
-    } else if (criteria === "publisher") {
-      return e.publisher.toLowerCase().includes(input);
+  const sortedData = songs.sort((a, b) => {
+    if (a[criteria] !== b[criteria]) {
+      return a[criteria].localeCompare(b[criteria]);
+    } else {
+      return a.titleRo.localeCompare(b.titleRo);
     }
   });
 
-  console.log(filteredData);
+  const filteredData = sortedData.filter((e) => {
+    if (input === "") {
+      return true;
+    } else if (criteria === "title") {
+      return e.titleRo.toLowerCase().includes(input.toLowerCase());
+    } else if (criteria === "titleOriginal") {
+      return e.titleOriginal.toLowerCase().includes(input.toLowerCase());
+    } else if (criteria === "book") {
+      return e.book.toLowerCase().includes(input.toLowerCase());
+    } else if (criteria === "year") {
+      return e.year.toLowerCase().includes(input.toLowerCase());
+    } else if (criteria === "number") {
+      return e.page.toLowerCase().includes(input.toLowerCase());
+    } else if (criteria === "admin") {
+      return e.admin.toLowerCase().includes(input.toLowerCase());
+    }
+    return false;
+  });
+
+  if (filteredData.length === 0) {
+    return (
+      <p style={{ color: "red", marginTop: "10px", textAlign: "center" }}>
+        Nicio cântare nu întâlnește criteriul filtrului 😔
+      </p>
+    );
+  }
 
   return (
     <div className="song-list">
@@ -41,21 +56,20 @@ function SongList({ input, songs, criteria }) {
           case "number":
             filter = "Numărul cântării " + song.number;
             break;
-          case "publisher":
-            filter = "Editura: " + song.publisher;
+          case "admin":
+            filter = "Adminul: " + song.admin;
             break;
           default:
-            filter = "";
             break;
         }
 
         return (
-          <div className="song-preview" key={song.id}>
-            <Link to={`/song/${song.id}`}>
+          <Link key={song.id} to={`/songDetails/${song.id}`}>
+            <div className="song-preview">
               <h2>{song.titleRo}</h2>
-              <p>{filter}</p>
-            </Link>
-          </div>
+              {input !== "" && <p>{filter}</p>}
+            </div>
+          </Link>
         );
       })}
     </div>

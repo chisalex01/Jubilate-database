@@ -1,14 +1,20 @@
-import Navbar from "./Navbar";
-import Home from "./Home";
-import SongDetails from "./SongDetails";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import AddSong from "./AddSong";
-import EditSong from "./EditSong";
-import React from "react";
 import Login from "./Login";
 import Register from "./Register";
-import AddData from "./AddData";
+import Navbar from "./Navbar";
+import Songs from "./Songs";
+import Books from "./Books";
+import Copyright from "./Copyright";
+import SongDetails from "./SongDetails";
+import BookDetails from "./BookDetails";
+import CopyrightDetails from "./CopyrightDetails";
+import AddSong from "./AddSong";
 import AddBook from "./AddBook";
+import AddCopyright from "./AddCopyright";
+import AddTiraj from "./AddTiraj";
+import EditSong from "./EditSong";
+import EditBook from "./EditBook";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -67,23 +73,41 @@ class App extends React.Component {
             <>
               <Navbar />
               <>
-                <Route path="/home">
-                  <Home />
+                <Route path="/songs">
+                  <Songs />
                 </Route>
-                <Route path="/addData">
-                  <AddData />
+                <Route path="/books">
+                  <Books />
                 </Route>
-                <Route path="/addBook">
-                  <AddBook />
+                <Route path="/copyright/:id">
+                  <Copyright />
                 </Route>
                 <Route path="/addSong">
                   <AddSong />
                 </Route>
-                <Route path="/song/:id">
+                <Route path="/addBook">
+                  <AddBook />
+                </Route>
+                <Route path="/addCopyright/:id">
+                  <AddCopyright />
+                </Route>
+                <Route path="/addTiraj/:id">
+                  <AddTiraj />
+                </Route>
+                <Route path="/songDetails/:id">
                   <SongDetails />
+                </Route>
+                <Route path="/bookDetails/:id">
+                  <BookDetails />
+                </Route>
+                <Route path="/copyrightDetails/:id/:ID">
+                  <CopyrightDetails />
                 </Route>
                 <Route path="/editSong/:id">
                   <EditSong />
+                </Route>
+                <Route path="/editBook/:id">
+                  <EditBook />
                 </Route>
               </>
             </>

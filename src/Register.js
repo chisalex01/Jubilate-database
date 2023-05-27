@@ -48,7 +48,7 @@ const Register = () => {
       setEmailMessage("");
     }
     if (!password) setPasswordMessage("*spațiu necompletat");
-    else if (password.length <= 8)
+    else if (password.length < 8 || password.length > 40)
       setPasswordMessage("*formatul parolei este incorect");
     else setPasswordMessage("");
 

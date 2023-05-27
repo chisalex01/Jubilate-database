@@ -30,13 +30,14 @@ const Login = () => {
         if (!email) {
           setEmailMessage("*spațiu necompletat");
         }
-        if (users[i].email == email && users[i].password != password) {
+        if (
+          users[i].email === email &&
+          users[i].password != password &&
+          password
+        ) {
           setPasswordMessage("*parolă incorectă");
           setEmailMessage("");
-        } else if (
-          (!password && !email) ||
-          (!password && users[i].email === email)
-        ) {
+        } else if (!password) {
           setPasswordMessage("*spațiu necompletat");
         } else {
           setPasswordMessage("");

@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault();
     for (let i = 0; i < users.length; i++)
       if (users[i].email === email && users[i].password === password) {
-        history.push("/home");
+        history.push("/songs");
       } else {
         if (users[i].email !== email && email) {
           setEmailMessage("*cont inexistent");
@@ -59,7 +59,6 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               type="text"
               autoComplete="off"
-              placeholder="email"
             />
             <p className="error">{emailMessage}</p>
           </div>
@@ -67,7 +66,6 @@ const Login = () => {
             <label htmlFor="password">Parolă</label>
             <input
               type={passwordShown ? "text" : "password"}
-              placeholder="parolă"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

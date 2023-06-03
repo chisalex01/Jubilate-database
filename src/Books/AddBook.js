@@ -8,7 +8,7 @@ const AddSong = () => {
   const history = useHistory();
 
   const goBack = () => {
-    history.push("/books");
+    history.goBack();
   };
 
   const handleSubmit = async (e) => {

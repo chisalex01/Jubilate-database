@@ -23,7 +23,7 @@ function BookList() {
     });
   };
 
-  const goToEdit = (event, id) => {
+  const goTo = (event, id) => {
     event.preventDefault();
     history.push(`/editBook/${id}`);
   };
@@ -46,7 +46,7 @@ function BookList() {
               <button
                 style={{ marginRight: "10px" }}
                 className="btn"
-                onClick={(event) => goToEdit(event, book.id)}
+                onClick={(event) => goTo(event, book.id)}
               >
                 Editați
               </button>

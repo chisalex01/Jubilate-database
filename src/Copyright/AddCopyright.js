@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 const AddCopyright = () => {
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
+  const [date, setDate] = useState("");
   const [notes, setNotes] = useState("");
   const [image, setImage] = useState("");
   const [isPending, setIsPending] = useState(false);
@@ -12,7 +13,7 @@ const AddCopyright = () => {
   const { id } = useParams();
 
   const goBack = () => {
-    history.goBack();
+    history.push(`/copyright/${id}`);
   };
 
   useEffect(() => {
@@ -26,6 +27,11 @@ const AddCopyright = () => {
     }
   }, [image]);
 
+  useEffect(() => {
+    const currentDate = new Date().toISOString().split("T")[0];
+    setDate(currentDate);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsPending(true);
@@ -35,11 +41,13 @@ const AddCopyright = () => {
       const song = response.data;
 
       const newObject = {
-        id: Date.now(),
+        id: id + name + role + date,
         name: name,
+        date: date,
         role: role,
         notes: notes,
         image: image,
+        contracts: [],
       };
 
       let updatedList;
@@ -68,12 +76,21 @@ const AddCopyright = () => {
     <div className="create">
       <h2>Adăugare drepturi autor</h2>
       <form onSubmit={handleSubmit}>
-        <label>Numele adminului:</label>
+        <label>Numele deținătorului de drepturi:</label>
         <input
           type="text"
           required
+          maxLength={25}
           value={name}
           onChange={(e) => setName(e.target.value)}
+        />
+        <label>Data:</label>
+        <input
+          type="date"
+          required
+          max={date}
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
         />
         <label>Rolul adminului</label>
         <select required value={role} onChange={(e) => setRole(e.target.value)}>
@@ -86,7 +103,7 @@ const AddCopyright = () => {
           <option value="Adaptor text">Adaptor text</option>
           <option value="Admin copyright">Admin drepturi de autor</option>
         </select>
-        <label>Corespondență:</label>
+        <label>Notițe:</label>
         <input
           type="text"
           value={notes}

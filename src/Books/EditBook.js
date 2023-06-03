@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
-const Edit = () => {
+const EditBook = () => {
   const [isPending] = useState(false);
   const history = useHistory();
   const [book, setBook] = useState({
@@ -12,7 +12,7 @@ const Edit = () => {
   const { id } = useParams();
 
   const goBack = () => {
-    history.push("/books");
+    history.push(`/books`);
   };
 
   const onInputChange = (e) => {
@@ -35,7 +35,7 @@ const Edit = () => {
       .put(`http://localhost:8000/books/${id}`, book)
       .then((response) => {
         console.log(response.status);
-        history.push(`/books`);
+        history.goBack();
       });
   };
 
@@ -48,7 +48,6 @@ const Edit = () => {
           type="text"
           required
           value={bookTitle}
-          placeholder="Titlu culegere"
           name="bookTitle"
           onChange={(e) => onInputChange(e)}
         />
@@ -64,4 +63,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default EditBook;

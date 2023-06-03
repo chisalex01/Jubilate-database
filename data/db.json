@@ -3,31 +3,28 @@
     {
       "titleRo": "Mărețul Har",
       "titleOriginal": "Amazing Grace",
-      "book": "Jubilate 1",
+      "book": "Jubilate 3",
       "year": "1990",
-      "number": "23",
+      "number": "25",
       "admin": "eu",
       "id": 4,
       "adminContact": "email@gmail.com",
       "copyright": [
         {
-          "id": 1685191279244,
-          "name": "d",
-          "role": "Compozitor",
+          "id": "4Alexandru ChișAdmin copyright2023-06-03",
+          "name": "Alexandru Chiș",
+          "date": "2023-06-03",
+          "role": "Admin copyright",
           "notes": "",
-          "image": ""
+          "image": "",
+          "contracts": [
+            {
+              "number": 1312312,
+              "type": "Contract de Cesiune"
+            }
+          ]
         }
       ]
-    },
-    {
-      "titleRo": "Titlu",
-      "titleOriginal": "Title",
-      "book": "Jubilate 1",
-      "year": "1999",
-      "number": "23",
-      "admin": "eu",
-      "id": 5,
-      "adminContact": "tu@email.com"
     }
   ],
   "users": [
@@ -61,15 +58,11 @@
           "year": "2000"
         },
         {
-          "size": "200",
-          "year": "2001"
+          "size": "500",
+          "year": "2010"
         }
       ],
       "id": 2
-    },
-    {
-      "bookTitle": "Jubilate 3",
-      "id": 3
     }
   ]
 }

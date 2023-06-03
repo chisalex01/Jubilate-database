@@ -1,5 +1,5 @@
 import SongList from "./SongList";
-import useFetch from "./useFetch";
+import useFetch from "../useFetch";
 import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -12,7 +12,7 @@ const Songs = () => {
   };
   const { data: songs, isPending } = useFetch("http://localhost:8000/songs/");
 
-  const goToLink = (link) => {
+  const goTo = (link) => {
     history.push(link);
   };
 
@@ -43,7 +43,7 @@ const Songs = () => {
         <button
           style={{ width: "100%", height: "20%" }}
           className="button"
-          onClick={() => goToLink("/addSong")}
+          onClick={() => goTo("/addSong")}
         >
           Adăugați o cântare nouă
         </button>

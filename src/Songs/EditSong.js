@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
-const Edit = () => {
+const EditSong = () => {
   const [isPending] = useState(false);
   const history = useHistory();
   const { id } = useParams();
@@ -58,7 +58,7 @@ const Edit = () => {
       .put(`http://localhost:8000/songs/${id}`, song)
       .then((response) => {
         console.log(response.status);
-        history.push(`/song/${id}`);
+        history.goBack();
       });
   };
 
@@ -71,7 +71,6 @@ const Edit = () => {
           type="text"
           required
           value={titleRo}
-          placeholder="Titlul în limba română"
           name="titleRo"
           onChange={(e) => onInputChange(e)}
         />
@@ -80,7 +79,6 @@ const Edit = () => {
           type="text"
           required
           value={titleOriginal}
-          placeholder="Titlul original"
           name="titleOriginal"
           onChange={(e) => onInputChange(e)}
         />
@@ -93,7 +91,7 @@ const Edit = () => {
           onChange={(e) => onInputChange(e)}
         >
           {books.map((e) => (
-            <option key={e.value} value={e.value}>
+            <option key={e.id} value={e.value}>
               {e.bookTitle}
             </option>
           ))}
@@ -105,7 +103,6 @@ const Edit = () => {
           value={year}
           min="1900"
           max={currentYear}
-          placeholder="Anul în care a fost lansată cântarea"
           name="year"
           onChange={(e) => onInputChange(e)}
         />
@@ -116,7 +113,6 @@ const Edit = () => {
           min="1"
           max="999"
           value={number}
-          placeholder="Numărul în culegerea Jubilate"
           name="number"
           onChange={(e) => onInputChange(e)}
         />
@@ -125,7 +121,6 @@ const Edit = () => {
           type="text"
           required
           value={admin}
-          placeholder="Deținător drepturi"
           name="admin"
           onChange={(e) => onInputChange(e)}
         />
@@ -134,20 +129,9 @@ const Edit = () => {
           type="text"
           required
           value={adminContact}
-          placeholder="Datele de contact ale adminului"
           name="adminContact"
           onChange={(e) => onInputChange(e)}
         />
-        {/* <label>Tip nou contract:</label>
-        <select
-          name="contract"
-          value={contract}
-          onChange={(e) => onInputChange(e)}
-        >
-          <option value="Contract de cesiune">Contract de cesiune</option>
-          <option value="Contract de editare">Contract de editare</option>
-          <option value="Plată în străinătate">Plată în străinătate</option>
-        </select> */}
         <div>
           {!isPending && <button>Modificați</button>}
           {isPending && <button disabled>Modificare...</button>}
@@ -160,4 +144,4 @@ const Edit = () => {
   );
 };
 
-export default Edit;
+export default EditSong;

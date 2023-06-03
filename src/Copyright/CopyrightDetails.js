@@ -44,10 +44,28 @@ const CopyrightDetails = () => {
   };
 
   const confirmDelete = () => {
-    axios.delete(`http://localhost:8000/songs/${id}`).then((response) => {
-      console.log(response.status);
-      history.push(`/copyright/${id}`);
-    });
+    axios
+      .get(`http://localhost:8000/songs/${id}`)
+      .then((response) => {
+        const song = response.data;
+        const updatedCopyright = song?.copyright.filter(
+          (item) => item.id !== ID
+        );
+
+        const updatedSong = {
+          ...song,
+          copyright: updatedCopyright,
+        };
+
+        return axios.put(`http://localhost:8000/songs/${id}`, updatedSong);
+      })
+      .then(() => {
+        console.log("Copyright deleted successfully.");
+        history.push(`/copyright/${id}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const cancelDelete = () => {
@@ -67,9 +85,7 @@ const CopyrightDetails = () => {
     <div className="details">
       {copyright && (
         <div style={{ position: "relative" }} className="songData">
-          <div className="title">
-            <h2>{copyright.id}</h2>
-          </div>
+          <div className="title"></div>
           <table>
             <tbody>
               <tr>
@@ -83,11 +99,11 @@ const CopyrightDetails = () => {
                 </td>
               </tr>
               <tr>
-                <td>Nume:</td>
+                <td>Deținătorului drepturilor de autor:</td>
                 <td>{copyright.name}</td>
               </tr>
               <tr>
-                <td>Rol:</td>
+                <td>Rolul deținătorului:</td>
                 <td>{copyright.role}</td>
               </tr>
               <tr>
@@ -101,12 +117,15 @@ const CopyrightDetails = () => {
             </tbody>
           </table>
           <div className="buttons">
-            <button className="button" onClick={() => goTo(`/copyright/${id}`)}>
-              Drepturi de autor
+            <button
+              className="button"
+              onClick={() => goTo(`/contracts/${id}/${ID}`)}
+            >
+              Contracte
             </button>
             <button
               className="button"
-              onClick={() => goTo(`/editCopyright/${id}`)}
+              onClick={() => goTo(`/editCopyright/${id}/${ID}`)}
             >
               Editați
             </button>

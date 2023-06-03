@@ -11,7 +11,7 @@ const AddTiraj = () => {
   const { id } = useParams();
 
   const goBack = () => {
-    history.push(`/bookDetails/${id}`);
+    history.goBack();
   };
 
   useEffect(() => {

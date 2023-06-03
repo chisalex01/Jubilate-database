@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import useFetch from "./useFetch";
+import useFetch from "../useFetch";
 import axios from "axios";
 
 const DeleteConfirmation = ({ onDelete, onCancel }) => (
@@ -54,19 +54,12 @@ const SongDetails = () => {
 
       {song && (
         <div style={{ position: "relative" }} className="songData">
-          <div className="title">
-            <h2>{song.titleRo}</h2>
-          </div>
+          <div className="title"></div>
           <table>
             <tbody>
               <tr>
-                <td
-                  style={{
-                    textAlign: "center",
-                  }}
-                  colSpan="2"
-                >
-                  Datele Cântării
+                <td style={{ textAlign: "center" }} colSpan={2}>
+                  Datele cântării
                 </td>
               </tr>
               <tr>

@@ -1,5 +1,5 @@
 import { useHistory, useParams } from "react-router-dom";
-import useFetch from "./useFetch";
+import useFetch from "../useFetch";
 import CopyrightList from "./CopyrightList";
 
 const Copyright = () => {
@@ -9,8 +9,8 @@ const Copyright = () => {
     `http://localhost:8000/songs/${id}`
   );
 
-  const goToAdd = () => {
-    history.push(`/addCopyright/${id}`);
+  const goTo = (link) => {
+    history.push(link);
   };
 
   return (
@@ -21,9 +21,16 @@ const Copyright = () => {
         <div>
           <div className="addButton">
             <button
-              style={{ width: "100%", height: "20%", marginTop: "20px" }}
+              style={{ width: "20%", height: "20%", marginTop: "20px" }}
               className="button"
-              onClick={goToAdd}
+              onClick={() => goTo(`/songDetails/${id}`)}
+            >
+              Înapoi
+            </button>
+            <button
+              style={{ width: "75%", height: "20%", marginTop: "20px" }}
+              className="button"
+              onClick={() => goTo(`/addCopyright/${id}`)}
             >
               Adaugă drepturi de autor
             </button>

@@ -15,7 +15,7 @@ const AddSong = () => {
   const [books, setBooks] = useState([]);
 
   const goBack = () => {
-    history.push("/songs");
+    history.push(`/songs`);
   };
 
   useEffect(() => {

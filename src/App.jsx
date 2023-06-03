@@ -1,18 +1,21 @@
 import Login from "./Login";
 import Register from "./Register";
 import Navbar from "./Navbar";
-import Songs from "./Songs";
-import Books from "./Books";
-import Copyright from "./Copyright";
-import SongDetails from "./SongDetails";
-import BookDetails from "./BookDetails";
-import CopyrightDetails from "./CopyrightDetails";
-import AddSong from "./AddSong";
-import AddBook from "./AddBook";
-import AddCopyright from "./AddCopyright";
-import AddTiraj from "./AddTiraj";
-import EditSong from "./EditSong";
-import EditBook from "./EditBook";
+import Songs from "./Songs/Songs";
+import Books from "./Books/Books";
+import Copyright from "./Copyright/Copyright";
+import Contracts from "./Contracts/Contracts";
+import SongDetails from "./Songs/SongDetails";
+import BookDetails from "./Books/BookDetails";
+import CopyrightDetails from "./Copyright/CopyrightDetails";
+import AddSong from "./Songs/AddSong";
+import AddBook from "./Books/AddBook";
+import AddCopyright from "./Copyright/AddCopyright";
+import AddContract from "./Contracts/AddContract";
+import AddTiraj from "./Tiraje/AddTiraj";
+import EditSong from "./Songs/EditSong";
+import EditBook from "./Books/EditBook";
+import EditCopyright from "./Copyright/EditCopyright";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -82,6 +85,9 @@ class App extends React.Component {
                 <Route path="/copyright/:id">
                   <Copyright />
                 </Route>
+                <Route path="/contracts/:id/:ID">
+                  <Contracts />
+                </Route>
                 <Route path="/addSong">
                   <AddSong />
                 </Route>
@@ -90,6 +96,9 @@ class App extends React.Component {
                 </Route>
                 <Route path="/addCopyright/:id">
                   <AddCopyright />
+                </Route>
+                <Route path="/addContract/:id/:ID">
+                  <AddContract />
                 </Route>
                 <Route path="/addTiraj/:id">
                   <AddTiraj />
@@ -108,6 +117,9 @@ class App extends React.Component {
                 </Route>
                 <Route path="/editBook/:id">
                   <EditBook />
+                </Route>
+                <Route path="/editCopyright/:id/:ID">
+                  <EditCopyright />
                 </Route>
               </>
             </>

@@ -1,6 +1,6 @@
 import { useHistory, useParams } from "react-router-dom";
-import useFetch from "./useFetch";
-import TirajeList from "./TirajeList";
+import useFetch from "../useFetch";
+import TirajeList from "../Tiraje/TirajeList";
 
 const BookDetails = () => {
   const history = useHistory();
@@ -9,8 +9,8 @@ const BookDetails = () => {
     `http://localhost:8000/books/${id}`
   );
 
-  const goToAddTiraj = () => {
-    history.push(`/addTiraj/${id}`);
+  const goTo = (link) => {
+    history.push(link);
   };
 
   return (
@@ -21,9 +21,16 @@ const BookDetails = () => {
         <div>
           <div className="addButton">
             <button
-              style={{ width: "100%", height: "20%", marginTop: "20px" }}
+              style={{ width: "20%", height: "20%", marginTop: "20px" }}
               className="button"
-              onClick={goToAddTiraj}
+              onClick={() => goTo("/books")}
+            >
+              Înapoi
+            </button>
+            <button
+              style={{ width: "75%", height: "20%", marginTop: "20px" }}
+              className="button"
+              onClick={() => goTo(`/addTiraj/${id}`)}
             >
               Adăugați un tiraj nou
             </button>

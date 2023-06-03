@@ -26,6 +26,8 @@ function CopyrightList({ copyright }) {
           >
             <div className="song-preview">
               <h2>{copyright.name}</h2>
+              <h2>{copyright.role}</h2>
+              <h2>{copyright.date}</h2>
             </div>
           </Link>
         );

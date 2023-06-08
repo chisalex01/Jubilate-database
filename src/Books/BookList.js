@@ -2,9 +2,29 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const DeleteConfirmation = ({ onDelete, onCancel }) => (
+  <div className="popup-overlay">
+    <div className="popup">
+      <div className="popup-content">
+        <p>Sigur doriți să ștergeți culegerea?</p>
+        <div className="popup-buttons">
+          <button className="button" onClick={onDelete}>
+            Șterge
+          </button>
+          <button className="button" onClick={onCancel}>
+            Anulează
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 function BookList() {
   const history = useHistory();
   const [books, setBooks] = useState([]);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [selectedBookId, setSelectedBookId] = useState(null);
 
   useEffect(() => {
     axios.get("http://localhost:8000/books").then((response) => {
@@ -18,9 +38,23 @@ function BookList() {
 
   const deleteOnClick = (event, id) => {
     event.preventDefault();
-    axios.delete(`http://localhost:8000/books/${id}`).then(() => {
-      setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));
+    setSelectedBookId(id);
+    setShowConfirmation(true);
+  };
+
+  const confirmDelete = () => {
+    axios.delete(`http://localhost:8000/books/${selectedBookId}`).then(() => {
+      setBooks((prevBooks) =>
+        prevBooks.filter((book) => book.id !== selectedBookId)
+      );
+      setSelectedBookId(null);
+      setShowConfirmation(false);
     });
+  };
+
+  const cancelDelete = () => {
+    setSelectedBookId(null);
+    setShowConfirmation(false);
   };
 
   const goTo = (event, id) => {
@@ -60,6 +94,9 @@ function BookList() {
           </div>
         </Link>
       ))}
+      {showConfirmation && (
+        <DeleteConfirmation onDelete={confirmDelete} onCancel={cancelDelete} />
+      )}
     </div>
   );
 }

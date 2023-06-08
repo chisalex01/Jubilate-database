@@ -20,11 +20,21 @@ const DeleteConfirmation = ({ onDelete, onCancel }) => (
   </div>
 );
 
+const ImageModal = ({ imageUrl, onClose }) => (
+  <div className="popup-overlay" onClick={onClose}>
+    <div className="popup-content">
+      <img src={imageUrl} alt="Preview" />
+    </div>
+  </div>
+);
+
 const CopyrightDetails = () => {
   const { id } = useParams();
   const { ID } = useParams();
   const history = useHistory();
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalImageUrl, setModalImageUrl] = useState(null);
   const [copyright, setCopyright] = useState(null);
 
   const fetchCopyright = async () => {
@@ -77,29 +87,39 @@ const CopyrightDetails = () => {
     history.push(link);
   };
 
+  const openImageModal = (imageUrl) => {
+    setModalImageUrl(imageUrl);
+    setShowModal(true);
+  };
+
+  const closeImageModal = () => {
+    setModalImageUrl(null);
+    setShowModal(false);
+  };
+
   useEffect(() => {
     fetchCopyright();
   }, [id]);
 
   return (
     <div className="details">
+      {showModal && (
+        <ImageModal imageUrl={modalImageUrl} onClose={closeImageModal} />
+      )}
+      {showConfirmation && (
+        <DeleteConfirmation onDelete={confirmDelete} onCancel={cancelDelete} />
+      )}
       {copyright && (
-        <div style={{ position: "relative" }} className="songData">
-          <div className="title"></div>
+        <div className="songData">
           <table>
             <tbody>
               <tr>
-                <td
-                  style={{
-                    textAlign: "center",
-                  }}
-                  colSpan="2"
-                >
+                <td style={{ textAlign: "center" }} colSpan="2">
                   Datele drepturilor de autor
                 </td>
               </tr>
               <tr>
-                <td>Deținătorului drepturilor de autor:</td>
+                <td>Deținător drepturi:</td>
                 <td>{copyright.name}</td>
               </tr>
               <tr>
@@ -108,11 +128,29 @@ const CopyrightDetails = () => {
               </tr>
               <tr>
                 <td>Notițe:</td>
-                <td>{copyright.notes}</td>
+                <td>
+                  <div
+                    style={{
+                      width: "700px",
+                      color: "white",
+                      wordWrap: "break-word",
+                      display: "block",
+                    }}
+                  >
+                    {copyright.notes}
+                  </div>
+                </td>
               </tr>
               <tr>
                 <td>Imagine:</td>
-                <td>{copyright.image}</td>
+                <td className="image-container">
+                  <img
+                    style={{ width: "700px" }}
+                    src={copyright.image}
+                    alt="Preview"
+                    onClick={() => openImageModal(copyright.image)}
+                  />
+                </td>
               </tr>
             </tbody>
           </table>
@@ -136,12 +174,6 @@ const CopyrightDetails = () => {
               Înapoi
             </button>
           </div>
-          {showConfirmation && (
-            <DeleteConfirmation
-              onDelete={confirmDelete}
-              onCancel={cancelDelete}
-            />
-          )}
         </div>
       )}
     </div>

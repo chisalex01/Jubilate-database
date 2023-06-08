@@ -20,29 +20,36 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    for (let i = 0; i < users.length; i++)
+    let isUserFound = false;
+
+    for (let i = 0; i < users.length; i++) {
       if (users[i].email === email && users[i].password === password) {
-        history.push("/songs");
-      } else {
-        if (users[i].email !== email && email) {
-          setEmailMessage("*cont inexistent");
-        }
-        if (!email) {
-          setEmailMessage("*spațiu necompletat");
-        }
-        if (
-          users[i].email === email &&
-          users[i].password != password &&
-          password
-        ) {
-          setPasswordMessage("*parolă incorectă");
-          setEmailMessage("");
-        } else if (!password) {
-          setPasswordMessage("*spațiu necompletat");
-        } else {
-          setPasswordMessage("");
-        }
+        isUserFound = true;
+        break;
       }
+    }
+
+    if (isUserFound) {
+      history.push("/songs");
+    } else {
+      if (!email) {
+        setEmailMessage("*spațiu necompletat");
+      } else if (emailExists(email)) {
+        setEmailMessage("");
+      } else {
+        setEmailMessage("*cont inexistent");
+      }
+
+      if (!password) {
+        setPasswordMessage("*spațiu necompletat");
+      } else {
+        setPasswordMessage("*parolă incorectă");
+      }
+    }
+  };
+
+  const emailExists = (email) => {
+    return users.some((user) => user.email === email);
   };
 
   return (

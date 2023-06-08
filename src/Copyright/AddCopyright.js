@@ -8,6 +8,7 @@ const AddCopyright = () => {
   const [date, setDate] = useState("");
   const [notes, setNotes] = useState("");
   const [image, setImage] = useState("");
+  const [imagePath, setImagePath] = useState(""); // Added imagePath state
   const [isPending, setIsPending] = useState(false);
   const history = useHistory();
   const { id } = useParams();
@@ -21,7 +22,7 @@ const AddCopyright = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64Data = reader.result.split(",")[1];
-        setImage(base64Data);
+        setImagePath(reader.result); // Set the base64 data as the image path
       };
       reader.readAsDataURL(image);
     }
@@ -46,7 +47,7 @@ const AddCopyright = () => {
         date: date,
         role: role,
         notes: notes,
-        image: image,
+        image: imagePath,
         contracts: [],
       };
 
@@ -70,6 +71,11 @@ const AddCopyright = () => {
       console.error(error);
       setIsPending(false);
     }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
   };
 
   return (
@@ -110,7 +116,15 @@ const AddCopyright = () => {
           onChange={(e) => setNotes(e.target.value)}
         />
         <label>Încărcați imagine</label>
-        <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+        <input type="file" onChange={handleFileChange} />
+        {imagePath && (
+          <div>
+            <h4 style={{ marginBottom: "20px", marginTop: "20px" }}>
+              Previzualizare imagine
+            </h4>
+            <img src={imagePath} alt="Preview" />
+          </div>
+        )}{" "}
         {isPending && <p>În curs de autentificare...</p>}
         <div>
           <button type="submit">Adaugă</button>

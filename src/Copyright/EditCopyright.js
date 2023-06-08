@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 const EditCopyright = () => {
-  const [isPending] = useState(false);
+  const [isPending, setIsPending] = useState(false);
   const history = useHistory();
   const [copyright, setCopyright] = useState({
     name: "",
@@ -14,6 +14,23 @@ const EditCopyright = () => {
   });
   const { name, role, date, notes, image } = copyright;
   const { id, ID } = useParams();
+  const [file, setFile] = useState(null);
+  const [imagePath, setImagePath] = useState(""); // Added imagePath state
+
+  const onFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64Data = reader.result.split(",")[1];
+        setImagePath(reader.result); // Set the base64 data as the image path
+      };
+      reader.readAsDataURL(selectedFile);
+    } else {
+      setImagePath(""); // Clear the image path if no file is selected
+    }
+  };
 
   const goBack = () => {
     history.push(`/copyrightDetails/${id}/${ID}`);
@@ -29,7 +46,7 @@ const EditCopyright = () => {
       const song = response.data;
 
       for (let i = 0; i < song?.copyright.length; i++) {
-        if (song?.copyright[i].id == ID) {
+        if (song?.copyright[i].id === ID) {
           setCopyright(song?.copyright[i]);
           break;
         }
@@ -45,19 +62,21 @@ const EditCopyright = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsPending(true);
+
     try {
       const response = await axios.get(`http://localhost:8000/songs/${id}`);
       const song = response.data;
 
       const updatedList = song?.copyright.map((item) => {
-        if (item.id == ID) {
+        if (item.id === ID) {
           return {
             ...item,
             name: name,
             date: date,
             role: role,
             notes: notes,
-            image: image,
+            image: imagePath || item.image, // Use the new imagePath if available, otherwise use the existing image
           };
         }
         return item;
@@ -70,9 +89,11 @@ const EditCopyright = () => {
 
       await axios.put(`http://localhost:8000/songs/${id}`, updatedSong);
 
+      setIsPending(false);
       history.goBack();
     } catch (error) {
       console.error(error);
+      setIsPending(false);
     }
   };
 
@@ -123,12 +144,8 @@ const EditCopyright = () => {
           onChange={onInputChange}
         />
         <label>Imagine nouă</label>
-        <input
-          type="file"
-          value={image}
-          name="image"
-          onChange={onInputChange}
-        />
+        <input type="file" name="image" onChange={onFileChange} />
+        {imagePath && <img src={imagePath} alt="Preview" />}
         <div>
           {!isPending && <button>Modificați</button>}
           {isPending && <button disabled>Modificare...</button>}

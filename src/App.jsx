@@ -17,15 +17,29 @@ import EditSong from "./Songs/EditSong";
 import EditBook from "./Books/EditBook";
 import EditCopyright from "./Copyright/EditCopyright";
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLogginActive: true,
+      isLoggedIn: false,
     };
   }
+
+  handleLogin = () => {
+    this.setState({ isLoggedIn: true });
+  };
+
+  handleLogout = () => {
+    this.setState({ isLoggedIn: false });
+  };
 
   changeState() {
     const { isLogginActive } = this.state;
@@ -143,5 +157,14 @@ const RightSide = (props) => {
     </div>
   );
 };
+
+const ProtectedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      isLoggedIn ? <Component {...props} /> : <Redirect to="/" />
+    }
+  />
+);
 
 export default App;

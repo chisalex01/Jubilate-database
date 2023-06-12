@@ -61,44 +61,42 @@ const Register = () => {
 
   return (
     <div className="base-container">
-      <div className="content">
-        <div className="image">
-          <img src={require("./Logo.png")} alt="register" />
-        </div>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              type="text"
-              value={email}
-              placeholder="ex: email@gmail.com"
-            />
-            <p className="error">{emailMessage}</p>
-          </div>
-          <div className="form-group">
-            <label>Parolă</label>
-            <input
-              type={passwordShown ? "text" : "password"}
-              value={password}
-              placeholder="ex: parolă123 (minim 8 caractere)"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <p className="error">{passwordMessage}</p>
-            <div className="checkbox">
-              <input
-                type={"checkbox"}
-                onClick={togglePassword}
-                className="check"
-              />
-              <p>Arată parola</p>
-            </div>
-          </div>
-
-          {!isPending && <button className="btn">Înregistrare</button>}
-          {isPending && <button disabled>Adăugare utilizator...</button>}
-        </form>
+      <div className="image">
+        <img src={require("./Logo.png")} alt="register" />
       </div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>Email</label>
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            value={email}
+            placeholder="ex: email@gmail.com"
+          />
+          <p className="error">{emailMessage}</p>
+        </div>
+        <div className="form-group">
+          <label>Parolă</label>
+          <input
+            type={passwordShown ? "text" : "password"}
+            value={password}
+            placeholder="ex: parolă123 (minim 8 caractere)"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <p className="error">{passwordMessage}</p>
+          <div className="checkbox">
+            <input
+              type={"checkbox"}
+              onClick={togglePassword}
+              className="check"
+            />
+            <p>Arată parola</p>
+          </div>
+        </div>
+
+        {!isPending && <button className="btn">Înregistrare</button>}
+        {isPending && <button disabled>Adăugare utilizator...</button>}
+      </form>
     </div>
   );
 };

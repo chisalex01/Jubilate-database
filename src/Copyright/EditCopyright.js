@@ -12,23 +12,21 @@ const EditCopyright = () => {
     notes: "",
     image: "",
   });
-  const { name, role, date, notes, image } = copyright;
+  const { name, role, date, notes } = copyright;
   const { id, ID } = useParams();
-  const [file, setFile] = useState(null);
-  const [imagePath, setImagePath] = useState(""); // Added imagePath state
+  const [imagePath, setImagePath] = useState("");
 
   const onFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    setFile(selectedFile);
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64Data = reader.result.split(",")[1];
-        setImagePath(reader.result); // Set the base64 data as the image path
+        setImagePath(reader.result);
       };
       reader.readAsDataURL(selectedFile);
     } else {
-      setImagePath(""); // Clear the image path if no file is selected
+      setImagePath("");
     }
   };
 
@@ -76,7 +74,7 @@ const EditCopyright = () => {
             date: date,
             role: role,
             notes: notes,
-            image: imagePath || item.image, // Use the new imagePath if available, otherwise use the existing image
+            image: imagePath || item.image,
           };
         }
         return item;

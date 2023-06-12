@@ -65,26 +65,21 @@ class App extends React.Component {
         <div className="App">
           <Switch>
             <Route exact path="/">
-              <div className="content">
-                <div className="login">
-                  <div
-                    className="container"
-                    ref={(ref) => (this.container = ref)}
-                  >
-                    {isLogginActive && (
-                      <Login containerRef={(ref) => (this.current = ref)} />
-                    )}
-                    {!isLogginActive && (
-                      <Register containerRef={(ref) => (this.current = ref)} />
-                    )}
-                  </div>
-                  <RightSide
-                    current={current}
-                    currentActive={currentActive}
-                    containerRef={(ref) => (this.rightSide = ref)}
-                    onClick={this.changeState.bind(this)}
-                  />
+              <div className="login">
+                <div ref={(ref) => (this.container = ref)}>
+                  {isLogginActive && (
+                    <Login containerRef={(ref) => (this.current = ref)} />
+                  )}
+                  {!isLogginActive && (
+                    <Register containerRef={(ref) => (this.current = ref)} />
+                  )}
                 </div>
+                <RightSide
+                  current={current}
+                  currentActive={currentActive}
+                  containerRef={(ref) => (this.rightSide = ref)}
+                  onClick={this.changeState.bind(this)}
+                />
               </div>
             </Route>
             <>

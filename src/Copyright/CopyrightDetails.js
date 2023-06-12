@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 
 const DeleteConfirmation = ({ onDelete, onCancel }) => (
-  <div className="popup-overlay">
+  <div className="popup-overlay delete">
     <div className="popup">
       <div className="popup-content">
         <p>Sigur doriți să ștergeți aceste drepturi de autor?</p>

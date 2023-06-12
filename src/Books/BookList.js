@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const DeleteConfirmation = ({ onDelete, onCancel }) => (
-  <div className="popup-overlay">
+  <div className="popup-overlay delete">
     <div className="popup">
       <div className="popup-content">
         <p>Sigur doriți să ștergeți culegerea?</p>

@@ -8,7 +8,6 @@ const AddContract = () => {
   const [isPending, setIsPending] = useState(false);
   const history = useHistory();
   const { id, ID } = useParams();
-  const { contracts } = useParams();
 
   const goBack = () => {
     history.goBack();
@@ -27,15 +26,11 @@ const AddContract = () => {
         type: type,
       };
 
-      const updatedContracts = contracts
-        ? [...contracts, newContract]
-        : [newContract];
-
       const updatedCopyright = song?.copyright.map((item) => {
         if (item.id === ID) {
           return {
             ...item,
-            contracts: updatedContracts,
+            contracts: [...item.contracts, newContract],
           };
         }
         return item;

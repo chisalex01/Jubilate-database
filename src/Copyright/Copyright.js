@@ -15,7 +15,7 @@ const Copyright = () => {
 
   return (
     <div className="content home">
-      <h1>Drepturi de autor</h1>
+      <h1>Drepturile de autor ale cântării {song && song.titleRo}</h1>
       {isPending && <div>Conținutul paginii se încarcă...</div>}
       {song && (
         <div>

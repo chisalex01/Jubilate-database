@@ -15,7 +15,7 @@ const BookDetails = () => {
 
   return (
     <div className="content home">
-      <h1>Tiraje</h1>
+      <h1>Tirajele culegerii {book && book.bookTitle}</h1>
       {isPending && <div>Conținutul paginii se încarcă...</div>}
       {book && (
         <div>

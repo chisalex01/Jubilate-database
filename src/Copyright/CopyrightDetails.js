@@ -147,7 +147,6 @@ const CopyrightDetails = () => {
                   <img
                     style={{ width: "700px" }}
                     src={copyright.image}
-                    alt="Preview"
                     onClick={() => openImageModal(copyright.image)}
                   />
                 </td>
